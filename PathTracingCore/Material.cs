@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using Extensions;
 
 namespace PathTracingCore
 {
@@ -17,12 +18,12 @@ namespace PathTracingCore
         protected bool Refract(in Vector3 v, in Vector3 n, float niOverNt, out Vector3 refacted)
         {
             refacted = new Vector3();
-            Vector3 uv = v / v.Length();
+            Vector3 uv = v.UnitVector();
             float dt = Vector3.Dot(uv, n);
-            float discriminant = 1.0f - niOverNt * (1 - dt * dt);
+            float discriminant = 1.0f - niOverNt * niOverNt *(1 - dt * dt);
             if (discriminant > 0)
             {
-                refacted = niOverNt * (uv - n * dt) - n * (float)Math.Sqrt(discriminant);
+                refacted = niOverNt * (uv - (n * dt)) - n * (float)Math.Sqrt(discriminant);
                 return true;
             }
             return false;

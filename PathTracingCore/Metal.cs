@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using Extensions;
 
 namespace PathTracingCore
 {
@@ -9,14 +10,14 @@ namespace PathTracingCore
     {
         Vector3 albedo;
         float fuzz;
-        public Metal(in Vector3 a, float f)
+        public Metal(in Vector3 a, float f = 1f)
         {
             albedo = a;
             fuzz = f < 1 ? f : 1;
         }
         public override bool Scatter(in Ray ray, in HitRecord record, out Vector3 attenuation, out Ray scattered)
         {
-            Vector3 reflected = Reflect((ray.Direction / ray.Direction.Length()), record.normal);
+            Vector3 reflected = Reflect(ray.Direction.UnitVector(), record.normal);
             scattered = new Ray(record.p, reflected + fuzz*ray.RandomInUnitSphere());
             attenuation = albedo;
             return (Vector3.Dot(scattered.Direction, record.normal) > 0);
