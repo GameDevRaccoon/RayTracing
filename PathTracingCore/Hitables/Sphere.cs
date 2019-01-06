@@ -46,8 +46,10 @@ namespace PathTracingCore
             return false;
         }
 
-        Vector3 center;
-        float radius;
-        Material material;
+        public Vector3 center;
+        public float radius;
+        public Material material;
+
+        public string Type => "Sphere";
     }
 }

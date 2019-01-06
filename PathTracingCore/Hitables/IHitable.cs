@@ -15,6 +15,7 @@ namespace PathTracingCore
 
     interface IHitable
     {
+        string Type { get; }
         bool Hit(Ray r, float tMin, float tMax, out HitRecord record);
     }
 }

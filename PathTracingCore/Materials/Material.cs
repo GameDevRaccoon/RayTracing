@@ -10,6 +10,8 @@ namespace PathTracingCore
     {
         public abstract bool Scatter(in Ray ray, in HitRecord record, out Vector3 attenuation, out Ray scattered);
 
+        public abstract string Type { get; }
+
         protected Vector3 Reflect(in Vector3 v, in Vector3 n)
         {
             return v - (2 * Vector3.Dot(v, n) * n);

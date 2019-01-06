@@ -8,7 +8,9 @@ namespace PathTracingCore
 {
     class Lambertian : Material
     {
-        Vector3 albedo;
+        public Vector3 albedo;
+
+        public override string Type => "Lambertian";
 
         public Lambertian(in Vector3 a)
         {

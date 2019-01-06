@@ -7,8 +7,11 @@ namespace PathTracingCore
 {
     class Dielectric : Material
     {
-        float refIndex;
-        Random rand = new Random();
+        public float refIndex;
+        public Random rand = new Random();
+
+        public override string Type => "Dielectric";
+
         public Dielectric(float ri)
         {
             refIndex = ri;
